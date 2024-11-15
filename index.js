@@ -7,12 +7,18 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // middleware
-const corsOptions = {
-    origin: ['http://localhost:5173', 'http://localhost:5174'],
-    credentials: true,
-    optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+//Must remove "/" from your production URL
+app.use(
+    cors({
+        origin: [
+            "http://localhost:5173",
+            "http://localhost:5174",
+            "https://gadget-shop-ad189.web.app",
+            "https://gadget-shop-ad189.firebaseapp.com",
+        ],
+        credentials: true,
+    })
+);
 app.use(express.json());
 // verify token
 const verifyToken = (req, res, next) => {
